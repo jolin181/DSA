@@ -1,22 +1,31 @@
 import java.util.*;
-public class dbmb{
-    public static void main(String[]args){
+
+public class hugepile {
+
+    public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
         int time=sc.nextInt();
         while(time-->0){
-            int n=sc.nextInt();
-            int s=sc.nextInt();
-            int x=sc.nextInt();
-            int tot=0;
-            for(int i=0;i<n;i++){
-                tot+=sc.nextInt();
+            int n= sc.nextInt();
+            int k= sc.nextInt();
+            if (k > n) {
+                System.out.println(-1);
+                continue;
             }
-           if(tot>s){
-               System.out.println("NO");
-               continue;
+            int div=1,f=0;
+           for(int i=0;i<=31;i++){
+               int low=n/div;
+               int high=(n+div-1)/div;
+               if(low<=k&&high>=k){
+                   System.out.println(i);
+                   f=1;
+                   break;
+               }
+               div*=2;
            }
-           int sub=s-tot;
-           System.out.println(sub%x==0?"YES":"NO");
+           if(f==0)System.out.println(-1);
+
         }
     }
+
 }
