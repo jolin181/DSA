@@ -1,33 +1,31 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class hugepile {
-    static int ans;
+
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
         int time=sc.nextInt();
         while(time-->0){
             int n= sc.nextInt();
             int k= sc.nextInt();
-            ans=Integer.MAX_VALUE;
-            find(n,k,0);
-            if(ans==Integer.MAX_VALUE){
+            if (k > n) {
                 System.out.println(-1);
+                continue;
             }
-            else{
-                System.out.println(ans);
-            }
+            int div=1,f=0;
+           for(int i=0;i<=31;i++){
+               int low=n/div;
+               int high=(n+div-1)/div;
+               if(low<=k&&high>=k){
+                   System.out.println(i);
+                   f=1;
+                   break;
+               }
+               div*=2;
+           }
+           if(f==0)System.out.println(-1);
+
         }
     }
-   public static void find(int n,int k,int count){
-        if(n<k)return ;
-        if(n==k){
-            ans=Math.min(count,ans);
-            return;
-        }
-       int f=n/2;
-       int s=n-f;
-        find(f,k,count+1);
-        find(s,k,count+1);
 
-   }
 }
